@@ -1,11 +1,13 @@
 //DVD BOUNCE
-
+let div;
 let screenSizeY = 700;
-let screenSizeX = 1000;
+let screenSizeX = 1190;
 let imgSizeX = 200;
 let imgSizeY = 100;
 let img;
+let speed = 5;
 let c;
+let speedSlider;
 
 function preload(){
   img = loadImage("./DVD_logo.png");
@@ -18,16 +20,16 @@ class DVD{
   }
   move(){
     if(this.velocity.x > 0){
-      this.position.x += 5;
+      this.position.x += speed;
     }
     if(this.velocity.y > 0){
-      this.position.y += 5;
+      this.position.y += speed;
     }
     if(this.velocity.x < 0){
-      this.position.x -= 5;
+      this.position.x -= speed;
     }
     if(this.velocity.y < 0){
-      this.position.y -= 5;
+      this.position.y -= speed;
     }
   }
   changeColor(){
@@ -66,12 +68,18 @@ let dvd = new DVD({
 });
 
 function setup() {
+  speedSlider = createSlider(1,50,5);
+  div = createDiv("Speed: " + speedSlider.value());
+  div.style('font-size', '32px');
+  div.position(speedSlider.position.x, speedSlider.position.y + 50);
   c = color(random(255), random(255), random(255));
   createCanvas(screenSizeX,screenSizeY);
   img.resize(imgSizeX,imgSizeY);
 }
 
 function draw() {
+  div.html('Speed: ' + speedSlider.value());
+  speed = speedSlider.value();
   background(0);
   dvd.draw();
   dvd.move();
