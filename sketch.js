@@ -1,0 +1,79 @@
+//DVD BOUNCE
+
+let screenSizeY = 742;
+let screenSizeX = 1223;
+let imgSizeX = 200;
+let imgSizeY = 100;
+let img;
+let c;
+
+function preload(){
+  img = loadImage("./DVD_logo.png");
+}
+class DVD{
+  constructor({position, velocity, size}){
+    this.position = position;
+    this.velocity = velocity;
+    this.size = size;
+  }
+  move(){
+    if(this.velocity.x > 0){
+      this.position.x += 5;
+    }
+    if(this.velocity.y > 0){
+      this.position.y += 5;
+    }
+    if(this.velocity.x < 0){
+      this.position.x -= 5;
+    }
+    if(this.velocity.y < 0){
+      this.position.y -= 5;
+    }
+  }
+  changeColor(){
+    c =  color(random(255), random(255), random(255));
+  }
+  bounce(){
+    if(this.position.x >= screenSizeX - this.size.x){
+      this.velocity.x *= -1;
+      this.changeColor();
+    }
+    if(this.position.x <= 0){
+      this.velocity.x *= -1;
+      this.changeColor();
+    }
+    if(this.position.y >= screenSizeY - this.size.y){
+      this.velocity.y *= -1;
+      this.changeColor();
+    }
+    if(this.position.y <= 0){
+      this.velocity.y *= -1;
+      this.changeColor();
+    }
+  }
+
+  //926,472
+  //463, 236
+  draw(){
+    tint(c);
+    image(img, this.position.x, this.position.y);
+  }
+}
+let dvd = new DVD({
+  position: {x: 150, y: 150},
+  velocity: {x: 1, y: 1},
+  size: {x: imgSizeX, y: imgSizeY},
+});
+
+function setup() {
+  c = color(random(255), random(255), random(255));
+  createCanvas(screenSizeX,screenSizeY);
+  img.resize(imgSizeX,imgSizeY);
+}
+
+function draw() {
+  background(0);
+  dvd.draw();
+  dvd.move();
+  dvd.bounce();
+}
