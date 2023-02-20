@@ -1,7 +1,7 @@
 //DVD BOUNCE
 
-let screenSizeY = 742;
-let screenSizeX = 1223;
+let screenSizeY = 700;
+let screenSizeX = 1000;
 let imgSizeX = 200;
 let imgSizeY = 100;
 let img;
@@ -60,7 +60,7 @@ class DVD{
   }
 }
 let dvd = new DVD({
-  position: {x: 150, y: 150},
+  position: {x: 175, y: 155},
   velocity: {x: 1, y: 1},
   size: {x: imgSizeX, y: imgSizeY},
 });
